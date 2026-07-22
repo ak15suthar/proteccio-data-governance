@@ -58,6 +58,22 @@ export interface ValueAssessment {
   daysSinceAccess: number;
 }
 
+interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+}
+
+async function handleResponse<T>(response: Response): Promise<T> {
+  const json: ApiResponse<T> = await response.json();
+
+  if (!response.ok || !json.success) {
+    throw new Error(json.error || 'Request failed');
+  }
+
+  return json.data as T;
+}
+
 export const api = {
   async uploadDataset(file: File): Promise<Dataset> {
     const formData = new FormData();
@@ -68,27 +84,17 @@ export const api = {
       body: formData,
     });
 
-    if (!response.ok) {
-      throw new Error('Upload failed');
-    }
-
-    return response.json();
+    return handleResponse<Dataset>(response);
   },
 
   async getDatasets(): Promise<Dataset[]> {
     const response = await fetch(`${API_BASE}/datasets`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch datasets');
-    }
-    return response.json();
+    return handleResponse<Dataset[]>(response);
   },
 
   async getDataset(id: string): Promise<Dataset> {
     const response = await fetch(`${API_BASE}/datasets/${id}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch dataset');
-    }
-    return response.json();
+    return handleResponse<Dataset>(response);
   },
 
   async updateColumnSensitivity(
@@ -103,60 +109,42 @@ export const api = {
       body: JSON.stringify({ isSensitive, sensitiveType }),
     });
 
-    if (!response.ok) {
-      throw new Error('Failed to update column');
-    }
-
-    return response.json();
+    return handleResponse<any>(response);
   },
 
   async getQualityCheck(datasetId: string): Promise<QualityCheck> {
     const response = await fetch(`${API_BASE}/quality/${datasetId}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch quality check');
-    }
-    return response.json();
+    return handleResponse<QualityCheck>(response);
   },
 
   async runQualityChecks(datasetId: string): Promise<QualityCheck> {
     const response = await fetch(`${API_BASE}/quality/${datasetId}/run`, {
       method: 'POST',
     });
-    if (!response.ok) {
-      throw new Error('Failed to run quality checks');
-    }
-    return response.json();
+    return handleResponse<QualityCheck>(response);
   },
 
   async getTrustScore(datasetId: string): Promise<TrustScore> {
     const response = await fetch(`${API_BASE}/trust/${datasetId}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch trust score');
-    }
-    return response.json();
+    return handleResponse<TrustScore>(response);
   },
 
   async calculateTrustScore(datasetId: string): Promise<TrustScore> {
     const response = await fetch(`${API_BASE}/trust/${datasetId}/calculate`, {
       method: 'POST',
     });
-    if (!response.ok) {
-      throw new Error('Failed to calculate trust score');
-    }
-    return response.json();
+    return handleResponse<TrustScore>(response);
   },
 
   async getValueAssessment(datasetId: string): Promise<ValueAssessment> {
     const response = await fetch(`${API_BASE}/value/${datasetId}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch value assessment');
-    }
-    return response.json();
+    return handleResponse<ValueAssessment>(response);
   },
 
   async trackAccess(datasetId: string): Promise<void> {
-    await fetch(`${API_BASE}/value/${datasetId}/access`, {
+    const response = await fetch(`${API_BASE}/value/${datasetId}/access`, {
       method: 'POST',
     });
+    await handleResponse<any>(response);
   },
 };

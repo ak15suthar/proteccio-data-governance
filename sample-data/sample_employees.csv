@@ -1,0 +1,26 @@
+id,name,email,phone,age,salary,department,start_date,address
+1,John Smith,john.smith@example.com,555-123-4567,32,75000,Engineering,2021-03-15,123 Main St New York NY
+2,Jane Doe,jane.doe@company.org,555-234-5678,28,65000,Marketing,2022-01-20,456 Oak Ave Los Angeles CA
+3,Bob Johnson,bob.johnson@email.com,555-345-6789,45,95000,Engineering,2019-06-10,789 Pine Rd Chicago IL
+4,Alice Williams,alice.w@test.com,555-456-7890,35,82000,Sales,2020-09-05,321 Elm St Houston TX
+5,Charlie Brown,charlie@example.com,555-567-8901,29,58000,Marketing,2023-02-28,654 Maple Dr Phoenix AZ
+6,Diana Prince,diana.p@company.org,555-678-9012,38,88000,Engineering,2020-11-12,987 Cedar Ln Miami FL
+7,Edward Norton,edward@example.com,555-789-0123,42,92000,Sales,2018-04-20,147 Birch Way Seattle WA
+8,Fiona Apple,fiona.a@email.com,555-890-1234,31,71000,Marketing,2021-08-15,258 Walnut Ct Boston MA
+9,George Lucas,george@example.com,555-901-2345,55,105000,Engineering,2017-01-05,369 Spruce Pl Denver CO
+10,Hannah Montana,hannah.m@test.com,555-012-3456,26,52000,Sales,2023-05-10,741 Ash Blvd Atlanta GA
+11,Ivan Petrov,ivan@example.com,555-111-2222,33,73000,Engineering,2021-07-22,852 Poplar St Dallas TX
+12,Julia Roberts,julia.r@company.org,555-222-3333,40,85000,Marketing,2019-12-01,963 Hickory Ave San Francisco CA
+13,Kevin Hart,kevin@example.com,555-333-4444,37,79000,Sales,2020-03-18,159 Cypress Rd Portland OR
+14,Laura Palmer,laura.p@email.com,555-444-5555,29,62000,Engineering,2022-06-30,357 Magnolia Ln Las Vegas NV
+15,Michael Scott,michael.s@test.com,555-555-6666,48,98000,Sales,2018-09-12,468 Redwood Dr Minneapolis MN
+16,Nancy Drew,nancy@example.com,555-666-7777,34,76000,Marketing,2021-02-14,579 Sycamore Way Detroit MI
+17,Oscar Wilde,oscar.w@company.org,555-777-8888,44,91000,Engineering,2019-08-25,680 Willow Ct Phoenix AZ
+18,Princess Leia,princess@example.com,555-888-9999,30,68000,Sales,2022-04-08,791 Cherry Blvd San Diego CA
+19,Quentin Tarantino,quentin.t@email.com,555-999-0000,52,102000,Engineering,2017-05-20,802 Peach Pl Austin TX
+20,Rachel Green,rachel.g@test.com,555-000-1111,27,55000,Marketing,2023-01-15,913 Plum St Seattle WA
+21,,,,,,,,
+22,Broken Email,not-an-email,555-1111,abc,xyz,Engineering,invalid-date,
+23,Susan Calvin,susan.c@example.com,555-123-4567,39,87000,Engineering,2020-07-11,147 Oak Ave Boston MA
+24,Tom Riddle,tom.r@evil.com,555-234-5678,50,0,Villain,1990-12-31,Dark Castle London UK
+25,Hermione Granger,hermione@gryffindor.edu,555-345-6789,18,0,Student,2023-09-01,333 Hogwarts Express
