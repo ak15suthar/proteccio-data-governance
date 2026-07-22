@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Dataset {
+  id            String         @id @default(uuid())
+  filename      String
+  uploadTime    DateTime       @default(now())
+  rowCount      Int
+  columnCount   Int
+  filePath      String
+  columns       Column[]
+  qualityChecks QualityCheck?
+  trustScore    TrustScore?
+  usage         DatasetUsage?
+
+  @@map("datasets")
+}
+
+model Column {
+  id             String    @id @default(uuid())
+  datasetId      String
+  name           String
+  inferredType   String
+  isSensitive    Boolean   @default(false)
+  sensitiveType  String?
+  manualOverride Boolean   @default(false)
+  dataset        Dataset   @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  @@unique([datasetId, name])
+  @@map("columns")
+}
+
+model QualityCheck {
+  id                String   @id @default(uuid())
+  datasetId         String   @unique
+  missingPercentage Float
+  duplicateRows     Int
+  invalidValues     Int
+  qualityScore      Float
+  columnStats       Json?
+  dataset           Dataset  @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  @@map("quality_checks")
+}
+
+model TrustScore {
+  id              String  @id @default(uuid())
+  datasetId       String  @unique
+  score           Float
+  qualityScore    Float
+  completeness    Float
+  accuracy        Float
+  consistency     Float
+  classification  Float
+  dataset         Dataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  @@map("trust_scores")
+}
+
+model DatasetUsage {
+  id          String   @id @default(uuid())
+  datasetId   String   @unique
+  viewCount   Int      @default(0)
+  lastAccessed DateTime?
+  usageHistory Json?
+  dataset     Dataset  @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  @@map("dataset_usage")
+}
