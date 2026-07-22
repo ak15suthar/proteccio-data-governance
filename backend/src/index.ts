@@ -6,6 +6,7 @@ import datasetRoutes from './routes/datasets';
 import qualityRoutes from './routes/quality';
 import trustRoutes from './routes/trust';
 import valueRoutes from './routes/value';
+import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 
 const prisma = new PrismaClient();
 const app = express();
@@ -34,6 +35,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// 404 handler
+app.use(notFoundHandler);
+
+// Error handler
+app.use(errorHandler);
+
 async function startServer() {
   try {
     await prisma.$connect();
@@ -44,7 +51,7 @@ async function startServer() {
   }
 
   app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`🚀 Server running on port ${PORT}`);
   });
 }
 
